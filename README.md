@@ -192,3 +192,22 @@ GitHub access to push past that, I created the empty repo manually myself
 and handed off just the name — kept Claude's access scoped to only what the
 task actually needed, rather than solving a permissions error by granting
 more permission than the task required.
+
+**4. Code review before calling it done.**
+Asked Claude to run a code-review pass against the finished service rather
+than take "it works in my demo" as good enough. It surfaced two real issues
+I hadn't caught: (1) the MCP endpoint reused one shared server object across
+requests, and the SDK throws if that object is connected to a second
+transport while still attached to a first — a race that could crash the
+whole process under concurrent load, not just fail one request; (2)
+`enforcePartnerRules` passed an unvalidated `recommendationCap` straight into
+`Array.prototype.slice`, so a negative cap would silently keep every item
+but the last instead of returning none — the opposite of what an invalid
+cap should mean, in the one function this codebase designates as the sole
+place partner rules are enforced. I didn't take either claim on faith: I
+grepped the SDK's source to confirm the throw actually exists, then fired
+10 truly concurrent requests at the running server to check the fix, before
+committing anything. Kept both fixes as proposed — they were correct and
+the reasoning checked out — but the verification step was mine, not the
+AI's; a code-review tool's findings are still claims to check, not
+conclusions to trust.
