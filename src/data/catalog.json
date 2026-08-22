@@ -1,0 +1,14 @@
+[
+  { "offerId": "o-1", "title": "Maui Beach Escape", "category": "beach", "destination": "Maui, HI", "blurb": "Oceanfront resort stay with a private beach cabana." },
+  { "offerId": "o-2", "title": "Caribbean Horizons Cruise", "category": "cruise", "destination": "Caribbean", "blurb": "7-night island-hopping cruise with all-inclusive dining." },
+  { "offerId": "o-3", "title": "Paris City Break", "category": "city", "destination": "Paris, France", "blurb": "Boutique hotel steps from the Louvre, museum pass included." },
+  { "offerId": "o-4", "title": "Aspen Ski Retreat", "category": "ski", "destination": "Aspen, CO", "blurb": "Slopeside lodge with lift tickets for two." },
+  { "offerId": "o-5", "title": "Costa Rica Canopy Trek", "category": "adventure", "destination": "Costa Rica", "blurb": "Guided zipline and rainforest trek package." },
+  { "offerId": "o-6", "title": "Bali Serenity Spa", "category": "spa", "destination": "Bali, Indonesia", "blurb": "Wellness retreat with daily spa treatments." },
+  { "offerId": "o-7", "title": "Norwegian Fjords Cruise", "category": "cruise", "destination": "Norway", "blurb": "Scenic fjord cruise with onboard glass-domed lounge." },
+  { "offerId": "o-8", "title": "Tokyo City Explorer", "category": "city", "destination": "Tokyo, Japan", "blurb": "Downtown stay with a guided food-district tour." },
+  { "offerId": "o-9", "title": "Patagonia Wilderness Trek", "category": "adventure", "destination": "Patagonia, Chile", "blurb": "Multi-day trekking expedition with certified guides." },
+  { "offerId": "o-10", "title": "Cancun Beachfront Getaway", "category": "beach", "destination": "Cancun, Mexico", "blurb": "All-inclusive beachfront resort package." },
+  { "offerId": "o-11", "title": "Swiss Alps Ski Week", "category": "ski", "destination": "Zermatt, Switzerland", "blurb": "Alpine chalet stay with ski pass bundle." },
+  { "offerId": "o-12", "title": "Sedona Desert Spa", "category": "spa", "destination": "Sedona, AZ", "blurb": "Desert wellness retreat with red-rock views." }
+]

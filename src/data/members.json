@@ -1,0 +1,34 @@
+[
+  {
+    "memberId": "m-1001",
+    "name": "Dana Whitfield",
+    "partnerId": "p-aurora",
+    "tier": "gold",
+    "preferredCategories": ["beach", "city", "cruise", "adventure"],
+    "pastCategories": ["beach", "city"]
+  },
+  {
+    "memberId": "m-1002",
+    "name": "Raj Patel",
+    "partnerId": "p-aurora",
+    "tier": "silver",
+    "preferredCategories": ["cruise", "ski", "beach"],
+    "pastCategories": ["cruise"]
+  },
+  {
+    "memberId": "m-2001",
+    "name": "Lena Fischer",
+    "partnerId": "p-summit",
+    "tier": "gold",
+    "preferredCategories": ["beach", "cruise", "spa", "city"],
+    "pastCategories": ["spa"]
+  },
+  {
+    "memberId": "m-3001",
+    "name": "Owen Castillo",
+    "partnerId": "p-harborview",
+    "tier": "platinum",
+    "preferredCategories": ["adventure", "cruise", "ski", "city"],
+    "pastCategories": []
+  }
+]

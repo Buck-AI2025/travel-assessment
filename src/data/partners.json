@@ -1,0 +1,23 @@
+[
+  {
+    "partnerId": "p-aurora",
+    "name": "Aurora Rewards",
+    "recommendationCap": 3,
+    "excludedCategories": ["cruise"],
+    "lastUpdated": "2026-07-01T00:00:00Z"
+  },
+  {
+    "partnerId": "p-summit",
+    "name": "Summit Travel Club",
+    "recommendationCap": 5,
+    "excludedCategories": [],
+    "lastUpdated": "2026-05-14T00:00:00Z"
+  },
+  {
+    "partnerId": "p-harborview",
+    "name": "Harborview Alliance",
+    "recommendationCap": 2,
+    "excludedCategories": ["cruise", "adventure"],
+    "lastUpdated": "2026-08-10T00:00:00Z"
+  }
+]
