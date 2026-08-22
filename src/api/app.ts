@@ -37,14 +37,24 @@ export function createApp() {
   app.get("/health", (_req, res) => res.json({ status: "ok" }));
 
   // ---- MCP server ------------------------------------------------------
-  // Stateless mode: a fresh transport per request, wired to the same
-  // McpServer instance. This is the endpoint an AI agent discovers and
-  // invokes (e.g. via a POST with a JSON-RPC "tools/call" body).
-  const mcpServer = createMcpServer();
-
+  // Stateless mode: a fresh McpServer + transport per request. This is the
+  // endpoint an AI agent discovers and invokes (e.g. via a POST with a
+  // JSON-RPC "tools/call" body).
+  //
+  // A single shared McpServer instance was tried first, but the SDK's
+  // Protocol.connect() throws if a transport is already attached — reusing
+  // one server across overlapping requests means a second request arriving
+  // before the first's `res.on('close')` cleanup can crash the handler with
+  // an unhandled rejection. Creating a new (cheap — just tool registration)
+  // McpServer per request avoids that race entirely; this matches the
+  // pattern in the SDK's own stateless-mode example.
   app.post("/mcp", async (req, res) => {
+    const mcpServer = createMcpServer();
     const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
-    res.on("close", () => transport.close());
+    res.on("close", () => {
+      transport.close();
+      mcpServer.close();
+    });
     await mcpServer.connect(transport);
     await transport.handleRequest(req, res, req.body);
   });

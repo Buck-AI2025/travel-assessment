@@ -14,13 +14,22 @@ export function enforcePartnerRules(
   const afterExclusions = candidates.filter((offer) => !excludedSet.has(offer.category.toLowerCase()));
   const excludedByCategory = candidates.length - afterExclusions.length;
 
-  const capped = afterExclusions.slice(0, partnerConfig.recommendationCap);
+  // A negative or non-integer cap must mean "show nothing," not
+  // Array.prototype.slice's negative-index behavior (slice(0, -1) drops
+  // only the last item, keeping the rest) — the opposite of what an
+  // invalid cap should mean from the one function every surface trusts to
+  // enforce this rule.
+  const safeCap = Number.isInteger(partnerConfig.recommendationCap)
+    ? Math.max(0, partnerConfig.recommendationCap)
+    : 0;
+
+  const capped = afterExclusions.slice(0, safeCap);
   const truncatedByCap = afterExclusions.length - capped.length;
 
   return {
     recommendations: capped,
     appliedRules: {
-      recommendationCap: partnerConfig.recommendationCap,
+      recommendationCap: safeCap,
       excludedCategories: partnerConfig.excludedCategories,
       candidatesConsidered: candidates.length,
       excludedByCategory,
