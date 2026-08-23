@@ -26,12 +26,22 @@ npm run dev         # start the HTTP server (REST + MCP) on :3000
 
 ### MCP server
 
-`POST /mcp` — a standard MCP endpoint (JSON-RPC over HTTP, stateless). Exposes two tools:
+`POST /mcp` — an MCP endpoint using the Streamable HTTP transport in stateless
+mode (JSON-RPC over HTTP, with a fresh transport per request). Exposes two tools:
 
 - `get_member_profile({ memberId })`
 - `get_recommendations({ memberId })` — same enforcement path as the REST endpoint
 
-Example (`tools/call`):
+Discover the available tools first (`tools/list`):
+
+```bash
+curl -s http://localhost:3000/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+```
+
+Then invoke one of them (`tools/call`):
 
 ```bash
 curl -s http://localhost:3000/mcp \
@@ -39,6 +49,27 @@ curl -s http://localhost:3000/mcp \
   -H "Accept: application/json, text/event-stream" \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"get_recommendations","arguments":{"memberId":"m-1001"}}}'
 ```
+
+### Demo expectations
+
+`npm run demo` walks through all four mocked members and shows the rules applied
+for each member's partner. Its output demonstrates that recommendation caps are
+respected, excluded categories are removed, and a partner configuration change
+made while the process is running is enforced on the very next recommendation
+request.
+
+### Validation
+
+The current executable validation path is:
+
+```bash
+npm run build
+npm run demo
+```
+
+The project does not yet define a dedicated `npm test` script; the build provides
+the TypeScript compile/type check, and the demo exercises the end-to-end mocked
+recommendation and partner-rule flow.
 
 ### Mock data
 
