@@ -248,3 +248,15 @@ committing anything. Kept both fixes as proposed — they were correct and
 the reasoning checked out — but the verification step was mine, not the
 AI's; a code-review tool's findings are still claims to check, not
 conclusions to trust.
+
+**5. Documentation improvements, validation, and GitHub handoff.**
+
+Asked Codex to complete the remaining medium-priority improvements and apply
+them to the GitHub repository. Codex clarified the MCP Streamable HTTP
+transport, added a `tools/list` discovery example before the existing
+`tools/call` example, documented what the four-member demo proves, and added
+the current validation process. It also confirmed that the previously
+identified high-priority MCP concurrency and invalid-cap issues were already
+fixed. Codex then ran the TypeScript build, end-to-end demo, and dependency
+audit; all passed, with no known vulnerabilities. I reviewed the reported
+changes before Codex committed and pushed them to `main` in commit `5e1f88b`.
