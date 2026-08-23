@@ -118,6 +118,7 @@ which is a contractual/business-rule breach, not a full outage. Escalate to
 high if confirmed to affect more than one partner.
 
 **Diagnose** (cheapest checks first):
+
 1. Pull the affected member's `partnerId` and confirm their partner's
    *current* config — does `excludedCategories` actually contain `"cruise"`?
    Confirm against the source of truth before assuming the report is right.
@@ -137,6 +138,7 @@ skipped enforcement call, or a string/category mismatch — with the specific
 evidence from steps 3–4.
 
 **Resolve:**
+
 - Stale cache → invalidate/refresh the partner config cache for that partner
   immediately.
 - Enforcement not invoked/bypassed → hotfix the code path so rule
@@ -167,6 +169,7 @@ _Draft below reflects the actual Claude session used to build this — reviewed
 and to be finalized in your own words before submitting._
 
 **1. Mapping the assessment itself.**
+
 Asked Claude to lay out the full set of requirements (code artifact, README
 sections A/B/C, video walkthrough) visually so nothing got lost across a long
 back-and-forth. It produced a one-page visual map showing the three
@@ -175,6 +178,7 @@ separately. Kept as-is — used it for the rest of the session to track what
 was still outstanding.
 
 **2. Choosing how to expose the MCP server.**
+
 Asked how to make `get_recommendations`/`get_member_profile` discoverable and
 callable by an agent. Claude proposed `@modelcontextprotocol/sdk` with a
 stateless `StreamableHTTPServerTransport` (a fresh transport per request, no
@@ -185,6 +189,7 @@ single-call lookups, but would need reconsidering if a future agent flow
 needed multi-turn context on the MCP connection itself.
 
 **3. GitHub repo creation.**
+
 Asked Claude to create the new GitHub repository directly. It hit a 403 —
 the GitHub App connected to the session only had access to an unrelated
 repo, not account-wide repo-creation rights. Rather than widening Claude's
@@ -194,6 +199,7 @@ task actually needed, rather than solving a permissions error by granting
 more permission than the task required.
 
 **4. Code review before calling it done.**
+
 Asked Claude to run a code-review pass against the finished service rather
 than take "it works in my demo" as good enough. It surfaced two real issues
 I hadn't caught: (1) the MCP endpoint reused one shared server object across
